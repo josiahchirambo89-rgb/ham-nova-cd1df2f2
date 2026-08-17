@@ -1,0 +1,12 @@
+{
+  "name": "HAM PRO — AI study companion",
+  "short_name": "HAM PRO",
+  "description": "AI tutor, 69 interactive labs, syllabus and tests for Zambian and international learners.",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}
