@@ -81,6 +81,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "HAM PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { title: "HAM PRO — AI tutor, labs and tests for every learner" },
+      { property: "og:title", content: "HAM PRO — AI tutor, labs and tests for every learner" },
+      { name: "twitter:title", content: "HAM PRO — AI tutor, labs and tests for every learner" },
+      { name: "description", content: "HAM PRO is an AI study companion with a talking tutor, 69 interactive science labs, syllabus tracking, timed tests and study groups." },
+      { property: "og:description", content: "HAM PRO is an AI study companion with a talking tutor, 69 interactive science labs, syllabus tracking, timed tests and study groups." },
+      { name: "twitter:description", content: "HAM PRO is an AI study companion with a talking tutor, 69 interactive science labs, syllabus tracking, timed tests and study groups." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

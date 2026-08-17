@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Learn with a voice-enabled AI tutor, interactive labs, syllabus tracking and offline tests.",
+          "HAM PRO is an AI study companion with a talking tutor, 69 interactive science labs, syllabus tracking, timed tests and study groups.",
       },
     ],
   }),
