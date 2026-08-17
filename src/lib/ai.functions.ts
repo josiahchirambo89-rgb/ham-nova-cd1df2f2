@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { aiErrorMessage } from "./ai-errors";
 
 const chatInput = z.object({
   level: z.string().default("secondary"),
@@ -67,7 +68,12 @@ export const identifyImage = createServerFn({ method: "POST" })
                   ? `Identify this and make notes. Extra context: ${data.hint}`
                   : "Identify this and make study notes.",
               },
-              { type: "image", image: new URL(data.imageDataUrl) },
+              {
+                type: "image",
+                image: data.imageDataUrl.split(",")[1] ?? data.imageDataUrl,
+                mediaType:
+                  /^data:([^;]+);/.exec(data.imageDataUrl)?.[1] ?? "image/jpeg",
+              },
             ],
           },
         ],
@@ -115,11 +121,3 @@ export const generateTest = createServerFn({ method: "POST" })
       throw new Error(aiErrorMessage(error));
     }
   });
-
-function aiErrorMessage(error: unknown) {
-  const raw = error instanceof Error ? error.message : String(error);
-  if (raw.includes("429")) return "HAM is busy right now — try again in a moment.";
-  if (raw.includes("402")) return "AI credits are exhausted for this workspace.";
-  if (raw.includes("403")) return "AI access is blocked for this workspace.";
-  return raw || "AI request failed";
-}
