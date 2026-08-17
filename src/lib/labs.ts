@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type LabParam = {
   key: string;
   label: string;
@@ -5,13 +6,13 @@ export type LabParam = {
   max: number;
   step: number;
   value: number;
-  unit?: string;
+  unit?: string | undefined;
 };
 
 export type LabOutput = {
   label: string;
-  unit?: string;
-  compute: (p: Record<string, number>) => number;
+  unit?: string | undefined;
+  compute: (p: any) => number;
 };
 
 export type LabVisual = "wave" | "projectile" | "orbit" | "bar" | "circuit" | "grid" | "pulse";
