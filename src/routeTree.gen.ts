@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppNotesRouteImport } from './routes/app.notes'
+import { Route as AppSnapRouteImport } from './routes/app.snap'
 import { Route as AppSyllabusRouteImport } from './routes/app.syllabus'
 import { Route as AppTutorRouteImport } from './routes/app.tutor'
 import { Route as AppLabsIndexRouteImport } from './routes/app.labs.index'
+import { Route as AppLabsSlugRouteImport } from './routes/app.labs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +40,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppNotesRoute = AppNotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSnapRoute = AppSnapRouteImport.update({
+  id: '/snap',
+  path: '/snap',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSyllabusRoute = AppSyllabusRouteImport.update({
   id: '/syllabus',
   path: '/syllabus',
@@ -52,22 +65,33 @@ const AppLabsIndexRoute = AppLabsIndexRouteImport.update({
   path: '/labs/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppLabsSlugRoute = AppLabsSlugRouteImport.update({
+  id: '/labs/$slug',
+  path: '/labs/$slug',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/notes': typeof AppNotesRoute
+  '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
   '/app/tutor': typeof AppTutorRoute
   '/app/': typeof AppIndexRoute
+  '/app/labs/$slug': typeof AppLabsSlugRoute
   '/app/labs/': typeof AppLabsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/notes': typeof AppNotesRoute
+  '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
   '/app/tutor': typeof AppTutorRoute
   '/app': typeof AppIndexRoute
+  '/app/labs/$slug': typeof AppLabsSlugRoute
   '/app/labs': typeof AppLabsIndexRoute
 }
 export interface FileRoutesById {
@@ -75,9 +99,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/notes': typeof AppNotesRoute
+  '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
   '/app/tutor': typeof AppTutorRoute
   '/app/': typeof AppIndexRoute
+  '/app/labs/$slug': typeof AppLabsSlugRoute
   '/app/labs/': typeof AppLabsIndexRoute
 }
 export interface FileRouteTypes {
@@ -86,20 +113,35 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/notes'
+    | '/app/snap'
     | '/app/syllabus'
     | '/app/tutor'
     | '/app/'
+    | '/app/labs/$slug'
     | '/app/labs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app/syllabus' | '/app/tutor' | '/app' | '/app/labs'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/notes'
+    | '/app/snap'
+    | '/app/syllabus'
+    | '/app/tutor'
+    | '/app'
+    | '/app/labs/$slug'
+    | '/app/labs'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/auth'
+    | '/app/notes'
+    | '/app/snap'
     | '/app/syllabus'
     | '/app/tutor'
     | '/app/'
+    | '/app/labs/$slug'
     | '/app/labs/'
   fileRoutesById: FileRoutesById
 }
@@ -139,6 +181,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/notes': {
+      id: '/app/notes'
+      path: '/notes'
+      fullPath: '/app/notes'
+      preLoaderRoute: typeof AppNotesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/snap': {
+      id: '/app/snap'
+      path: '/snap'
+      fullPath: '/app/snap'
+      preLoaderRoute: typeof AppSnapRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/syllabus': {
       id: '/app/syllabus'
       path: '/syllabus'
@@ -160,20 +216,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLabsIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/labs/$slug': {
+      id: '/app/labs/$slug'
+      path: '/labs/$slug'
+      fullPath: '/app/labs/$slug'
+      preLoaderRoute: typeof AppLabsSlugRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppNotesRoute: typeof AppNotesRoute
+  AppSnapRoute: typeof AppSnapRoute
   AppSyllabusRoute: typeof AppSyllabusRoute
   AppTutorRoute: typeof AppTutorRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppLabsSlugRoute: typeof AppLabsSlugRoute
   AppLabsIndexRoute: typeof AppLabsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppNotesRoute: AppNotesRoute,
+  AppSnapRoute: AppSnapRoute,
   AppSyllabusRoute: AppSyllabusRoute,
   AppTutorRoute: AppTutorRoute,
   AppIndexRoute: AppIndexRoute,
+  AppLabsSlugRoute: AppLabsSlugRoute,
   AppLabsIndexRoute: AppLabsIndexRoute,
 }
 
