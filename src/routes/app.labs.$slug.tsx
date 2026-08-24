@@ -41,7 +41,10 @@ function LabDetail() {
     saved.current = true;
     void supabase
       .from("lab_progress")
-      .upsert({ user_id: user.id, lab_slug: lab.slug, runs: 1, completed: false }, { onConflict: "user_id,lab_slug" })
+      .upsert(
+        { user_id: user.id, lab_slug: lab.slug, opened_count: 1, completed: false },
+        { onConflict: "user_id,lab_slug" },
+      )
       .then(() => undefined);
   }, [lab, user]);
 

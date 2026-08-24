@@ -153,7 +153,10 @@ function NotesPage() {
                     </button>
                     <button
                       onClick={() => {
-                        if (!speechSupported()) return toast.error("Speech isn't supported in this browser");
+                        if (!speechSupported()) {
+                          toast.error("Speech isn't supported in this browser");
+                          return;
+                        }
                         stopSpeaking();
                         speak(`${note.title}. ${note.content}`, prefs);
                       }}
