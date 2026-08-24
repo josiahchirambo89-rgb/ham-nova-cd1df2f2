@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppGroupsRouteImport } from './routes/app.groups'
 import { Route as AppNotesRouteImport } from './routes/app.notes'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSnapRouteImport } from './routes/app.snap'
 import { Route as AppSyllabusRouteImport } from './routes/app.syllabus'
+import { Route as AppTestsRouteImport } from './routes/app.tests'
 import { Route as AppTutorRouteImport } from './routes/app.tutor'
 import { Route as AppLabsIndexRouteImport } from './routes/app.labs.index'
 import { Route as AppLabsSlugRouteImport } from './routes/app.labs.$slug'
@@ -40,9 +43,19 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppGroupsRoute = AppGroupsRouteImport.update({
+  id: '/groups',
+  path: '/groups',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppNotesRoute = AppNotesRouteImport.update({
   id: '/notes',
   path: '/notes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSnapRoute = AppSnapRouteImport.update({
@@ -53,6 +66,11 @@ const AppSnapRoute = AppSnapRouteImport.update({
 const AppSyllabusRoute = AppSyllabusRouteImport.update({
   id: '/syllabus',
   path: '/syllabus',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTestsRoute = AppTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
   getParentRoute: () => AppRoute,
 } as any)
 const AppTutorRoute = AppTutorRouteImport.update({
@@ -75,9 +93,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/groups': typeof AppGroupsRoute
   '/app/notes': typeof AppNotesRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
+  '/app/tests': typeof AppTestsRoute
   '/app/tutor': typeof AppTutorRoute
   '/app/': typeof AppIndexRoute
   '/app/labs/$slug': typeof AppLabsSlugRoute
@@ -86,9 +107,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/groups': typeof AppGroupsRoute
   '/app/notes': typeof AppNotesRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
+  '/app/tests': typeof AppTestsRoute
   '/app/tutor': typeof AppTutorRoute
   '/app': typeof AppIndexRoute
   '/app/labs/$slug': typeof AppLabsSlugRoute
@@ -99,9 +123,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/groups': typeof AppGroupsRoute
   '/app/notes': typeof AppNotesRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/snap': typeof AppSnapRoute
   '/app/syllabus': typeof AppSyllabusRoute
+  '/app/tests': typeof AppTestsRoute
   '/app/tutor': typeof AppTutorRoute
   '/app/': typeof AppIndexRoute
   '/app/labs/$slug': typeof AppLabsSlugRoute
@@ -113,9 +140,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/groups'
     | '/app/notes'
+    | '/app/settings'
     | '/app/snap'
     | '/app/syllabus'
+    | '/app/tests'
     | '/app/tutor'
     | '/app/'
     | '/app/labs/$slug'
@@ -124,9 +154,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/app/groups'
     | '/app/notes'
+    | '/app/settings'
     | '/app/snap'
     | '/app/syllabus'
+    | '/app/tests'
     | '/app/tutor'
     | '/app'
     | '/app/labs/$slug'
@@ -136,9 +169,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/groups'
     | '/app/notes'
+    | '/app/settings'
     | '/app/snap'
     | '/app/syllabus'
+    | '/app/tests'
     | '/app/tutor'
     | '/app/'
     | '/app/labs/$slug'
@@ -181,11 +217,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/groups': {
+      id: '/app/groups'
+      path: '/groups'
+      fullPath: '/app/groups'
+      preLoaderRoute: typeof AppGroupsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/notes': {
       id: '/app/notes'
       path: '/notes'
       fullPath: '/app/notes'
       preLoaderRoute: typeof AppNotesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/snap': {
@@ -200,6 +250,13 @@ declare module '@tanstack/react-router' {
       path: '/syllabus'
       fullPath: '/app/syllabus'
       preLoaderRoute: typeof AppSyllabusRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/tests': {
+      id: '/app/tests'
+      path: '/tests'
+      fullPath: '/app/tests'
+      preLoaderRoute: typeof AppTestsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/tutor': {
@@ -227,9 +284,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppGroupsRoute: typeof AppGroupsRoute
   AppNotesRoute: typeof AppNotesRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppSnapRoute: typeof AppSnapRoute
   AppSyllabusRoute: typeof AppSyllabusRoute
+  AppTestsRoute: typeof AppTestsRoute
   AppTutorRoute: typeof AppTutorRoute
   AppIndexRoute: typeof AppIndexRoute
   AppLabsSlugRoute: typeof AppLabsSlugRoute
@@ -237,9 +297,12 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppGroupsRoute: AppGroupsRoute,
   AppNotesRoute: AppNotesRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppSnapRoute: AppSnapRoute,
   AppSyllabusRoute: AppSyllabusRoute,
+  AppTestsRoute: AppTestsRoute,
   AppTutorRoute: AppTutorRoute,
   AppIndexRoute: AppIndexRoute,
   AppLabsSlugRoute: AppLabsSlugRoute,
